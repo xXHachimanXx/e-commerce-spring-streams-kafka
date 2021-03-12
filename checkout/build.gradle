@@ -2,7 +2,10 @@ plugins {
 	id 'org.springframework.boot' version '2.4.3'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id "com.commercehub.gradle.plugin.avro" version "0.99.99"
 }
+
+apply plugin: "com.commercehub.gradle.plugin.avro"
 
 group = 'com.hachiman.ecommerce-spring-streams-kafka'
 version = '0.0.1-SNAPSHOT'
@@ -10,6 +13,9 @@ sourceCompatibility = '15'
 
 repositories {
 	mavenCentral()
+	maven {
+		url "https://plugins.gradle.org/m2/"
+	}
 }
 
 ext {
@@ -23,6 +29,7 @@ dependencies {
 	implementation 'org.springframework.cloud:spring-cloud-stream'
 	implementation 'org.springframework.cloud:spring-cloud-stream-binder-kafka-streams'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	compile "org.apache.avro:avro:1.10.1"
 }
 
 dependencyManagement {
@@ -34,3 +41,16 @@ dependencyManagement {
 test {
 	useJUnitPlatform()
 }
+
+avro {
+	fieldVisibility = "PRIVATE"
+}
+
+generateAvroJava {
+	source 'src/main/resources/avro'
+}
+
+generateTestAvroJava {
+	source 'src/main/resources/avro'
+}
+
