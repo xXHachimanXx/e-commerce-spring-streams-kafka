@@ -20,5 +20,12 @@ public class CheckoutEntity {
     @Column
     private String code;
 
+    @Column
+    @Enumerated(value = EnumType.STRING)
+    private Status status;
 
+    public enum Status {
+        CREATED,
+        APPROVED
+    }
 }
