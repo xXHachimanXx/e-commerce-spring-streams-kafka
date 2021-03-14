@@ -1,10 +1,9 @@
 package com.hachiman.ecommercespringstreamskafka.checkout.resource.checkout;
 
+import com.hachiman.ecommercespringstreamskafka.checkout.service.CheckoutService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,9 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class CheckoutResource {
 
-    @PostMapping("/")
-    public ResponseEntity<CheckoutRequest> create(@RequestBody CheckoutRequest checkoutRequest) {
+    private final CheckoutService checkoutService;
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(checkoutRequest);
+    @PostMapping("/")
+    public ResponseEntity<CheckoutRequest> create(CheckoutRequest checkoutRequest) {
+
+        checkoutService.create(checkoutRequest);
+
+        return ResponseEntity.ok().build();
     }
 }
