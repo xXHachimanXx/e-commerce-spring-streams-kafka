@@ -1,7 +1,7 @@
 {
   "type": "record",
   "name": "CheckoutCreatedEvent",
-  "namespace": "com.hatanaka.ecommerce.checkout.event",
+  "namespace": "com.hachiman.ecommerce.checkout.event",
   "fields": [
     {
       "name": "checkoutCode",

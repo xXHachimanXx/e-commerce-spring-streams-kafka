@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.List;
 
@@ -30,21 +29,3 @@ public class CheckoutRequest implements Serializable {
     private String cardCvv;
     private List<String> products;
 }
-/**
-  "firstName": "nome",
-  "lastName": "lastname",
- "address": "addr",
-  "email": "email",
-  "complement": "cplmn",
-  "country": "country",
- "state": "MG",
-  "cep": "12312312",
-  "saveAddress": true,
- "saveInfo": true,
-  "paymentMethod": "",
-  "cardName": "",
-  "cardNumber": "",
-  "cardDate": "",
-  "cardCvv": "ASDASD",
-   "products": "ASDAS"
- */
