@@ -1,4 +1,4 @@
-package com.hachiman.ecommercespringstreamskafka.checkout.streaming;
+package com.hachiman.ecommerce.checkout.streaming;
 
 import org.springframework.cloud.stream.annotation.Output;
 import org.springframework.messaging.MessageChannel;

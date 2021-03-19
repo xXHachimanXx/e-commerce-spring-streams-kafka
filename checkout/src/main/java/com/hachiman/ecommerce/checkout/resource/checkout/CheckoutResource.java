@@ -1,7 +1,7 @@
-package com.hachiman.ecommercespringstreamskafka.checkout.resource.checkout;
+package com.hachiman.ecommerce.checkout.resource.checkout;
 
-import com.hachiman.ecommercespringstreamskafka.checkout.entity.CheckoutEntity;
-import com.hachiman.ecommercespringstreamskafka.checkout.service.CheckoutService;
+import com.hachiman.ecommerce.checkout.entity.CheckoutEntity;
+import com.hachiman.ecommerce.checkout.service.CheckoutService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

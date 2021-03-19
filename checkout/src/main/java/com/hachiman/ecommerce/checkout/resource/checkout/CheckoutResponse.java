@@ -1,4 +1,4 @@
-package com.hachiman.ecommercespringstreamskafka.checkout.resource.checkout;
+package com.hachiman.ecommerce.checkout.resource.checkout;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

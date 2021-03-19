@@ -1,10 +1,13 @@
-package com.hachiman.ecommercespringstreamskafka.checkout.service;
+package com.hachiman.ecommerce.checkout.service;
 
-import com.hachiman.ecommercespringstreamskafka.checkout.entity.CheckoutEntity;
-import com.hachiman.ecommercespringstreamskafka.checkout.repository.CheckoutRepository;
-import com.hachiman.ecommercespringstreamskafka.checkout.resource.checkout.CheckoutRequest;
-import com.hachiman.ecommercespringstreamskafka.checkout.streaming.CheckoutCreatedSource;
+import com.hachiman.ecommerce.checkout.entity.CheckoutEntity;
+import com.hachiman.ecommerce.checkout.repository.CheckoutRepository;
+import com.hachiman.ecommerce.checkout.streaming.CheckoutCreatedSource;
+import com.hachiman.ecommerce.checkout.resource.checkout.CheckoutRequest;
+import com.hachiman.ecommerce.checkout.event.CheckoutCreatedEvent;
+
 import lombok.RequiredArgsConstructor;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -26,7 +29,12 @@ public class CheckoutServiceImpl implements CheckoutService {
                 .build();
 
         final CheckoutEntity entity = checkoutRepository.save(checkoutEntity);
-        //checkoutCreatedSource.output().send(MessageBuilder.withPayload().build());
+
+        final CheckoutCreatedEvent checkoutCreatedEvent = CheckoutCreatedEvent.newBuilder()
+                .setCheckoutCode(entity.getCode())
+                .setStatus(entity.getStatus())
+                .build();
+        checkoutCreatedSource.output().send(MessageBuilder.withPayload(checkoutCreatedEvent).build());
         return Optional.of(entity);
     }
 }

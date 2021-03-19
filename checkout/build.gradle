@@ -1,13 +1,11 @@
 plugins {
+	id 'com.commercehub.gradle.plugin.avro' version '0.99.99'
 	id 'org.springframework.boot' version '2.4.3'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
-	id "com.commercehub.gradle.plugin.avro" version "0.99.99"
 }
 
-apply plugin: "com.commercehub.gradle.plugin.avro"
-
-group = 'com.hachiman.ecommerce-spring-streams-kafka'
+	group = 'com.hachiman.ecommerce'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '15'
 
@@ -25,37 +23,26 @@ repositories {
 }
 
 ext {
-	set('springCloudVersion', "Hoxton.SR6")
+	set('springCloudVersion', "2020.0.1")
 	set('cucumberVersion', '6.6.0')
 	set('testContainersVersion', '1.14.3')
 	set('wireMockVersion', '2.27.2')
-	set('springCloudVersion', "2020.0.1")
 }
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.apache.kafka:kafka-streams'
 	implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
 	implementation 'org.springframework.cloud:spring-cloud-stream'
-	implementation 'org.springframework.cloud:spring-cloud-stream-binder-kafka-streams'
-    implementation 'org.projectlombok:lombok:1.18.16'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	runtimeOnly 'org.postgresql:postgresql'
-	testImplementation "org.testcontainers:postgresql:${testContainersVersion}"
-	compile "org.apache.avro:avro:1.10.1"
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.data:spring-data-envers'
-	implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
-	implementation 'org.springframework.cloud:spring-cloud-starter-stream-kafka'
-	implementation 'io.confluent:kafka-avro-serializer:5.5.0'
-	runtimeOnly 'org.postgresql:postgresql'
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation('org.springframework.boot:spring-boot-starter-test') {
-		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-	}
+	implementation group: 'org.springframework.cloud', name: 'spring-cloud-stream-binder-kafka', version: '3.1.1'
+	implementation 'org.springframework.cloud:spring-cloud-stream-binder-kafka-streams'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation group: 'io.confluent', name: 'kafka-avro-serializer', version: '5.3.0'
+	implementation group: 'org.postgresql', name: 'postgresql', version: '42.2.19'
+	compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.18'
+	annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.18'
 	testImplementation 'org.springframework.cloud:spring-cloud-stream-test-support'
 	testImplementation "io.cucumber:cucumber-spring:${cucumberVersion}"
 	testImplementation "io.cucumber:cucumber-java:${cucumberVersion}"
@@ -75,7 +62,6 @@ dependencyManagement {
 	}
 }
 
-
 test {
 	useJUnitPlatform()
 }
@@ -91,4 +77,3 @@ generateAvroJava {
 generateTestAvroJava {
 	source 'src/main/resources/avro'
 }
-
